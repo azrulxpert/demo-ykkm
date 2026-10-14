@@ -3379,6 +3379,7 @@
               <h3 class="font-heading font-bold text-lg text-slate-800 flex items-center">
                 <i class="fa-solid fa-triangle-exclamation text-amber-500 mr-2"></i> Tindakan Kueri Diperlukan
               </h3>
+              <p class="text-xs text-slate-500">Rujukan: ${claimId}</p>
             </div>
             <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
           </div>
@@ -3389,14 +3390,28 @@
           </div>
 
           <form onsubmit="window.submitKueriDocument(event, '${claimId}')" class="space-y-4 pt-2">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan Maklumbalas Pemohon</label>
-              <textarea id="kueri-applicant-remarks" rows="3" class="w-full p-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500" placeholder="Berikan penjelasan anda di sini..."></textarea>
+            
+            <!-- ZON MUAT NAIK DOKUMEN DIKEMBALIKAN -->
+            <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center bg-slate-50/50 hover:border-brand-500 transition">
+              <i class="fa-solid fa-file-arrow-up text-3xl text-brand-600 mb-2"></i>
+              <h5 class="font-bold text-sm text-slate-800">Muat Naik Dokumen Tambahan (Jika Perlu)</h5>
+              <p class="text-xs text-slate-400 mb-3">Maksimum 2MB (PDF/JPG/PNG)</p>
+              <input type="file" id="kueri-file-upload" accept="image/*,.pdf" class="hidden" onchange="validateAndPreviewUpload(this, 'kueri-file-lbl', 2)">
+              <label for="kueri-file-upload" class="bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold cursor-pointer shadow-sm inline-block transition hover:bg-slate-50">
+                <span id="kueri-file-lbl">Pilih Fail Dokumen</span>
+              </label>
             </div>
+            
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan Maklumbalas Pemohon <span class="text-slate-400 font-normal">(Pilihan)</span></label>
+              <textarea id="kueri-applicant-remarks" rows="3" class="w-full p-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500" placeholder="Berikan penjelasan atau maklumbalas anda terhadap kueri Urusetia di sini..."></textarea>
+            </div>
+
             <div class="flex justify-end space-x-2 pt-2 border-t border-slate-100">
-              <button type="button" onclick="closeModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold">Batal</button>
-              <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-800 hover:bg-brand-900 text-white text-xs font-bold shadow-md">
-                Hantar Maklumbalas
+              <button type="button" onclick="closeModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold transition">Batal</button>
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-800 hover:bg-brand-900 text-white text-xs font-bold shadow-md transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Hantar Maklumbalas Kueri</span>
               </button>
             </div>
           </form>
