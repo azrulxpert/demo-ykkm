@@ -2698,6 +2698,7 @@
       const remarks = document.getElementById('clm-remarks').value.trim();
 
       const quota = calculateCategoryUsage(ic, currentClaimCategory);
+
       if (currentClaimCategory === 'wad' && document.getElementById('clm-ward-type')?.value === 'caj') {
         if (quota.balance <= 0 || amount > quota.balance) {
           showToast(`Permohonan Gagal: Amaun dipohon melebihi baki siling tahunan (RM ${quota.balance.toFixed(2)}).`, 'error');
