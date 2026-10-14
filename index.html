@@ -251,7 +251,7 @@
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1 shadow-lg">
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1 shadow-lg">
       <button onclick="navigateTo('portal')" class="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-100 flex items-center">
         <i class="fa-solid fa-house w-6 text-brand-600"></i> Portal Utama
       </button>
@@ -1660,8 +1660,8 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'eYKKM_Master_DB_v2';
-    const SESSION_KEY = 'eYKKM_Active_User_Session_v2';
+    const STORAGE_KEY = 'eYKKM_Master_Database_2026';
+    const SESSION_KEY = 'eYKKM_Active_User_Session';
 
     // Senarai Kredensial Dummy Fiksyen Penuh (Tiada nama atau emel individu sebenar)
     const DUMMY_ACCOUNTS = {
@@ -2709,7 +2709,7 @@
       const claimId = 'CLM-2026-' + Math.floor(1000 + Math.random() * 9000);
       const labels = { kematian: 'Khairat Kematian', pembedahan: 'Pembedahan Hospital', wad: 'Caj Wad & Ubatan', bencana: 'Bencana Alam', haji: 'Sumbangan Haji' };
 
-      const db = getDatabase();
+      // Gunakan pembolehubah db yang telah diperoleh pada awal handleClaimSubmit.
       
       // PEMBAIKAN: Rujuk silang dengan profil keahlian untuk melengkapkan data peribadi
       const memberProfile = db.records.find(r => r.ic === ic && r.type === 'pendaftaran') || {};
