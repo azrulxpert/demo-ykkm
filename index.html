@@ -2675,6 +2675,24 @@
     function handleClaimSubmit(e) {
       e.preventDefault();
       const ic = document.getElementById('clm-ic').value.trim();
+      
+      // PEMBAIKAN KESELAMATAN: Validasi Pangkalan Data (Penghalang Bukan Ahli)
+      const db = getDatabase();
+      const existingMember = db.records.find(r => r.ic === ic);
+      const pendaftaranRecord = db.records.find(r => r.ic === ic && r.type === 'pendaftaran');
+
+      // 1. Sekat jika Nombor KP tiada langsung di dalam sistem
+      if (!existingMember) {
+        showToast('Ralat Akses: Nombor Kad Pengenalan ini TIADA dalam rekod keahlian YKKM. Sila daftar ahli terlebih dahulu.', 'error');
+        return; // Hentikan fungsi
+      }
+
+      // 2. Sekat jika daftar ahli sudah dibuat, tapi belum disahkan Urusetia
+      if (pendaftaranRecord && pendaftaranRecord.status !== 'LULUS') {
+        showToast(`Ralat Akses: Status pendaftaran keahlian anda masih [${pendaftaranRecord.status}]. Tuntutan hanya dibenarkan selepas keahlian diluluskan.`, 'warning');
+        return; // Hentikan fungsi
+      }
+
       const name = document.getElementById('clm-name').value.trim().toUpperCase();
       const amount = parseFloat(document.getElementById('clm-amount').value) || 0;
       const remarks = document.getElementById('clm-remarks').value.trim();
